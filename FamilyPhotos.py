@@ -235,4 +235,5 @@ root.title("White-Fields Family Photo Search")
 root.geometry("345x800")
 app = Application(root)
 root.mainloop()
+input()
  

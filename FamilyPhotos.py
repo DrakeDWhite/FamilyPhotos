@@ -170,10 +170,26 @@ class Application(Frame):
             for each in self.tier2_list:
                 if self.location_options.get() == each[4]:
                     self.tier3_list.append(each)
-            print(self.tier3_list)
         # if they didn't select anything for this filter, do no filtering
         else:
             self.tier3_list = self.tier2_list
+
+
+        ##########
+        ### STEP 4 - Decade Filter
+        ##########
+
+        # check to make sure they selected something
+        if self.decade_options.get():
+            # check for it if so
+            for each in self.tier3_list:
+                if str(self.decade_options.get()) == str(each[5]):
+                    self.final_list.append(each)
+            print(self.final_list)
+        # if they didn't select anything for this filter, do no filtering
+        else:
+            self.final_list = self.tier3_list
+            print(self.final_list)
 
                                       
 root = Tk()

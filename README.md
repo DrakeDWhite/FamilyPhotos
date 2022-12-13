@@ -7,7 +7,7 @@ This is a final project for Information Organization and Retrieval at University
     - See [the Python website](https://www.python.org/downloads/) to see how this is done. 
 2. Run (double-click) main.py. 
 3. Bish Bash Bosh, Bob's your uncle. 
-    - *Ironically, I do have an Uncle Bob, but don't have any photos of him in this collection.*
+    - *Ironically, I do have a distant great Uncle Bob, but don't have any photos of him in this collection.*
 
 ### TO-DO
 - Be sure to support at scale, so everything can be scaled up based on what we enter in the Family_Key.csv

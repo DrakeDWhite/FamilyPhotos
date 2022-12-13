@@ -6,7 +6,7 @@ This is a final project for Information Organization and Retrieval at University
 1. Download the full directory onto a computer with Python installed.
     - See [the Python website](https://www.python.org/downloads/) to see how this is done. 
 2. Run (double-click) FamilyPhotos.py
-3. Bish Bash Bosh, Bob's your uncle. 
+3. Fill out the search queries (detailed below) for the GUI that shows up. and at that, bish bash bosh, bobs your uncle. your results will open in your default browser window. 
     - *Ironically, I do have a distant Great Uncle Bob, but don't have any photos of him in this collection.*
 
 # How does the search engine work?

@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 import csv
 
 
@@ -6,13 +7,13 @@ import csv
 keywords = []
 
 # people, but we don't want repetition, so we'll weed them out as we're adding later
-people = []
+people = ['']
 
 # locations, but we don't want repetition, so we'll weed them out as we're adding later
-locations = []
+locations = ['']
 
 # decades, but we don't want repetition
-decades = []
+decades = ['']
 
 # open the file
 with open("Files/Family_key.csv", newline='') as csvfile:
@@ -30,13 +31,14 @@ with open("Files/Family_key.csv", newline='') as csvfile:
 # compile various lists
 for i in range(1, len(contents)):
     # compile unique keyword list
-    for each in (contents[i][2]).split(", "):
+    contents[i][2] = contents[i][2].split(', ')
+    for each in (contents[i][2]):
         if str(each).lower() not in keywords:
             keywords.append(str(each).lower())
     # compile unique people list
     for each in (contents[i][3]).split(", "):
-        if str(each).lower() not in people:
-            people.append(str(each).lower())
+        if str(each) not in people:
+            people.append(str(each))
     # compile locations
     if contents[i][4] not in locations:
         locations.append(contents[i][4])
@@ -51,78 +53,89 @@ locations = sorted(locations)
 decades = sorted(decades)
 
 # tracing
-#print(contents)
+# for each in contents:
+#     print(each[2])
 #print("Keywords:", keywords)
 #print("People: ", people)
 #print(len(people))
 #print("Locations:", locations)
 #print("Decades:", decades)
 
+# initialize application
+class Application(Frame):
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.grid()
+        self.create_widgets()
 
-# class Application(Frame):
-#     def __init__(self, master):
-#         Frame.__init__(self, master)
-#         self.grid()
-#         self.create_widgets()
+
+    def create_widgets(self):  
+        # start variables
+        # the person filter
+        self.person_filter = ""
+        # will determine how many rows of people we have buttons (columns = 4)
+        person_rows = len(people) // 4
+        # the location
+        self.location_filter = ""
+        # the decade
+        self.decade_filter = ""
+        # keyword search 
+        self.search_term = ''
+
+        ## keyword search
+        Label(self, text = "Single keyword (optional):",  font = ('arial', 12)).pack(pady = 5)
+        self.item_entry = Entry(self, width = 50)
+        self.item_entry.pack(pady = 5, padx = 20)
+
+        # people dropdown
+        Label(self, text = "Pick a person (leave blank for none):",  font = ('arial', 12)).pack(pady = 5)
+        self.people_options = ttk.Combobox(self)
+        self.people_options['values'] = people
+        self.people_options['state'] = 'readonly'
+        self.people_options.pack()
+
+        # location dropdown
+        Label(self, text = "Pick a place (leave blank for none):",  font = ('arial', 12)).pack(pady = 5)
+        self.location_options = ttk.Combobox(self)
+        self.location_options['values'] = locations
+        self.location_options['state'] = 'readonly'
+        self.location_options.pack()
+
+        # decade dropdown
+        Label(self, text = "Pick a decade (leave blank for none):",  font = ('arial', 12)).pack(pady = 5)
+        self.decade_options = ttk.Combobox(self)
+        self.decade_options['values'] = decades
+        self.decade_options['state'] = 'readonly'
+        self.decade_options.pack()
+
+        # submit button
+        submitBtn = Button(self, text = "Go!", command = self.generate_photos)
+        submitBtn.pack(pady = 10)
+
+        output_box = Text(self, height = 3, width = 40, state = 'disabled')
+        output_box.pack() 
+
+        # lists for generation
+        self.tier1_list = []
+        self.tier2_list = []
+        self.tier3_list = []
+        self.tier4_list = []
+
+    def generate_photos(self):
+        if (self.item_entry.get()) and (" " not in self.item_entry.get()):
+            for each in contents:
+                if self.item_entry.get() in each[2]:
+                    print(each)
+                    self.tier1_list.append(each)
+            print(self.tier1_list)
+        else:
+            print("no!")
 
 
-#     def create_widgets(self):
-#         self.cost = 0
-#         ## title and item
-#         Label(self, text = "What would you like delivered? ").grid(row = 0,
-#                                                                    column = 0)
-#         self.item_entry = Entry(self, width = 50)
-#         self.item_entry.grid(row = 0, column = 1, columnspan = 2,
-#                               sticky = "W")
-        
-
-#         ## delivery options
-#         self.delivery = StringVar()
-#         self.delivery.set(None)
-
-#         Label(self, text = "Options").grid(row = 1, column = 1)
-        
-#         Label(self, text = "Delivery Method:").grid(row = 2, column = 0)
-        
-#         self.drone = Radiobutton(self, text = "Flying Drone ($10)",
-#                                  variable = self.delivery,
-#                                  value = "flying drone")
-#         self.drone.grid(row = 3, column = 0)
-        
-#         self.car = Radiobutton(self, text = "Self Driving Car ($20)",
-#                                variable = self.delivery,
-#                                value = "self-driving car")
-#         self.car.grid(row = 4, column = 0)
-        
-#         self.robot = Radiobutton(self, text = "Giant Robot ($1000)",
-#                                  variable = self.delivery,
-#                                   value = "giant robot")
-#         self.robot.grid(row = 5, column = 0)
-        
-        
-#         ##addons
-
-#         self.express_value = BooleanVar()
-#         self.not_broken_value = BooleanVar()
-#         self.smile_value = BooleanVar()
-        
-#         Label(self, text = "Addons:").grid(row = 2, column = 2)
-#         self.express = Checkbutton(self, text = "Express Delivery (+$30)",
-#                                    variable = self.express_value)
-#         self.express.grid(row = 3, column = 2)
-#         self.not_broken = Checkbutton(self, text = "Mostly Not Broken (+$20)",
-#                                    variable = self.not_broken_value)
-#         self.not_broken.grid(row = 4, column = 2)
-#         self.smile = Checkbutton(self, text = "With a smile (+$1)",
-#                                    variable = self.smile_value)
-#         self.smile.grid(row = 5, column = 2)
-        
-
-#         ##bottom part
-
-#         self.confirm = Button(self, text = "Confirm Delivery", command = self.deliver)
-#         self.confirm.grid(row = 6, column = 1)
-
-#         self.results_txt = Text(self, width = 60, height = 8, wrap = WORD)
-#         self.results_txt.grid(row = 7, column = 0, columnspan = 3)
                                       
+root = Tk()
+root.title("White-Fields Family Photo Search")
+root.geometry("345x800")
+app = Application(root)
+root.mainloop()
+ 

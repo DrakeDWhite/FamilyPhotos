@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import csv
+import webbrowser
 
 
 # keywords, but we don't want repetition, so we'll weed them out as we're adding later
@@ -96,7 +97,7 @@ class Application(Frame):
         self.submitBtn.pack(pady = 10)
 
         # the output box, where we'll put all our messages or link to the html page
-        self.output_box = Text(self, height = 3, width = 40, state="disabled")
+        self.output_box = Text(self, height = 5, width = 40, state="disabled", wrap=WORD)
         self.output_box.pack() 
 
 
@@ -136,8 +137,8 @@ class Application(Frame):
         elif " " in self.item_entry.get():
             # if they do, give them a message saying so
             self.output_box['state'] = "normal"
-            self.output_box.insert(END, "Your keyword can only be one word! We'll ignore that field for now.")
-            self.output_box['state'] = "normal"
+            self.output_box.insert(END, "Your keyword can only be one word! We'll ignore that field for now.\n")
+            self.output_box['state'] = "disabled"
         # otherwise, just dump all of contents into tier 1 list for the next stage
         else:
             self.tier1_list = contents
@@ -189,7 +190,42 @@ class Application(Frame):
         else:
             self.final_list = self.tier3_list
 
-                                      
+        # start on the html
+        html = '''
+        <html>
+            <head>
+                <title> Search Results </title>
+            </head>
+            <body>
+                <h1> White-Family Photo Results</h1>
+        '''
+
+        # make sure we have some items in the final_list
+        # if we don't, no reason to write to a page. Just tell them it's empty.
+        if len(self.final_list) == 0:
+            self.output_box['state'] = "normal"
+            self.output_box.insert(END, "Your search returned no results. Try again!")
+            self.output_box['state'] = "disabled"
+        else:
+            for each in self.final_list:
+                html += '''
+                <p>
+                    <img src ="{0}" width = "500">
+                </p>
+                <p>
+                {1}
+                </p>
+                <br>
+                '''.format(each[1], each[6])
+        
+            html_out = open("final_results.html", "w")
+            html_out.write(html)
+            html_out.close()
+
+            webbrowser.open("final_results.html", new=2)
+
+
+### MAIN                                      
 root = Tk()
 root.title("White-Fields Family Photo Search")
 root.geometry("345x800")

@@ -19,48 +19,41 @@ decades = ['']
 with open("Files/Family_key.csv", newline='') as csvfile:
     # split each row
     filereader = csv.reader(csvfile, delimiter=',')
-    #for row in filereader:
-        # separate each item in each row
-        # for i in range(len(row)):
-            # print them, for tracing
-            # print(row[i])
 
-        #print("\n\n")
+    # make it a list of lists
     contents = list(filereader)
 
 # compile various lists
 for i in range(1, len(contents)):
-    # compile unique keyword list
+
+    # turning keywords and people into lists so we can search on them better later
     contents[i][2] = contents[i][2].lower().split(', ')
     contents[i][3] = contents[i][3].lower().split(', ')
+
+    # compile unique keyword list
     for each in (contents[i][2]):
         if str(each).lower() not in keywords:
             keywords.append(str(each).lower())
+
     # compile unique people list
     for each in (contents[i][3]):
         if str(each) not in people:
             people.append(str(each))
+
     # compile locations
     if contents[i][4] not in locations:
         locations.append(contents[i][4])
+
     # compile contents
     if contents[i][5] not in decades:
         decades.append(contents[i][5])
 
-
+# get our variables for the various data so we can plug them into widgets later
 keywords = sorted(keywords)
 people = sorted(people)
 locations = sorted(locations)
 decades = sorted(decades)
 
-# tracing
-# for each in contents:
-#     print(each[2])
-#print("Keywords:", keywords)
-#print("People: ", people)
-#print(len(people))
-#print("Locations:", locations)
-#print("Decades:", decades)
 
 # initialize application
 class Application(Frame):
@@ -69,19 +62,8 @@ class Application(Frame):
         self.grid()
         self.create_widgets()
 
-
+    # start widgets
     def create_widgets(self):  
-        # start variables
-        # the person filter
-        self.person_filter = ""
-        # will determine how many rows of people we have buttons (columns = 4)
-        person_rows = len(people) // 4
-        # the location
-        self.location_filter = ""
-        # the decade
-        self.decade_filter = ""
-        # keyword search 
-        self.search_term = ''
 
         ## keyword search
         Label(self, text = "Single keyword (optional):",  font = ('arial', 12)).pack(pady = 5)
@@ -117,29 +99,39 @@ class Application(Frame):
         self.output_box = Text(self, height = 3, width = 40, state="disabled")
         self.output_box.pack() 
 
+
+
+    def generate_photos(self):
         # lists for generation
+        # these are tiered because the filters are cumulative - so each step of the way. And each entry by the user whittles down our options a bit more
+
+        # could be more efficient, but, /shrug
         self.tier1_list = []
         self.tier2_list = []
         self.tier3_list = []
-        self.tier4_list = []
+        self.final_list = []
 
-    def generate_photos(self):
         # have to enabled and disable textbox to change value
+        # clearing it just in case there's anything left over from a previous run
         self.output_box['state'] = "normal"
         self.output_box.delete("1.0", END)
         self.output_box['state'] = "disabled"
+
+        ##########
+        ### STEP 1 - keyword filter
+        ##########
+
         # is keyword empty or more than one word?
         if (self.item_entry.get()) and (" " not in self.item_entry.get()):
-            # if not, check the third column in each row to see if the user's entry appears there
+            # if not, check the third column in each row to see if the user's keyword entry appears there
             for each in contents:
                 if self.item_entry.get().lower() in each[2]:
-                    # if it is, add it to the tier1 list
+                    # if it is, add the whole item to the tier1 list
                     self.tier1_list.append(each)
-            for each in self.tier1_list:
-                print(each)
-                print("\n")
-            print("\n\n")
-            #print(self.tier1_list)
+            # for each in self.tier1_list:
+            #     print(each)
+            #     print("\n")
+            # print("\n\n")
         # check if they have more than one word
         elif " " in self.item_entry.get():
             # if they do, give them a message saying so
@@ -149,15 +141,39 @@ class Application(Frame):
         # otherwise, just dump all of contents into tier 1 list for the next stage
         else:
             self.tier1_list = contents
-            #print(self.tier1_list)
+
+        ##########
+        ### STEP 2 - People filter
+        ##########
+
+        # see if they entered anything
         if self.people_options.get():
+            # if they did, filter everything we filtered out from keyword search
             for each in self.tier1_list:
-                #if self.people
                 if self.people_options.get() in each[3]:
                     self.tier2_list.append(each)
-                    for each in self.tier2_list:
-                        print(each)
+            # for each in self.tier2_list:
+            #     print(each)
+            # print()
+            # print()
+        # if they didn't enter anything for the people filter, just set tier2 list equal to tier1
+        else:
+            self.tier2_list = self.tier1_list
 
+        ##########
+        ### STEP 3 - Location Filter
+        ##########
+
+        # check to make sure they selected something
+        if self.location_options.get():
+            # check for it if so
+            for each in self.tier2_list:
+                if self.location_options.get() == each[4]:
+                    self.tier3_list.append(each)
+            print(self.tier3_list)
+        # if they didn't select anything for this filter, do no filtering
+        else:
+            self.tier3_list = self.tier2_list
 
                                       
 root = Tk()

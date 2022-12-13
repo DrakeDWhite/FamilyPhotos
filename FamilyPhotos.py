@@ -31,12 +31,13 @@ with open("Files/Family_key.csv", newline='') as csvfile:
 # compile various lists
 for i in range(1, len(contents)):
     # compile unique keyword list
-    contents[i][2] = contents[i][2].split(', ')
+    contents[i][2] = contents[i][2].lower().split(', ')
+    contents[i][3] = contents[i][3].lower().split(', ')
     for each in (contents[i][2]):
         if str(each).lower() not in keywords:
             keywords.append(str(each).lower())
     # compile unique people list
-    for each in (contents[i][3]).split(", "):
+    for each in (contents[i][3]):
         if str(each) not in people:
             people.append(str(each))
     # compile locations
@@ -109,11 +110,12 @@ class Application(Frame):
         self.decade_options.pack()
 
         # submit button
-        submitBtn = Button(self, text = "Go!", command = self.generate_photos)
-        submitBtn.pack(pady = 10)
+        self.submitBtn = Button(self, text = "Go!", command = self.generate_photos)
+        self.submitBtn.pack(pady = 10)
 
-        output_box = Text(self, height = 3, width = 40, state = 'disabled')
-        output_box.pack() 
+        # the output box, where we'll put all our messages or link to the html page
+        self.output_box = Text(self, height = 3, width = 40, state="disabled")
+        self.output_box.pack() 
 
         # lists for generation
         self.tier1_list = []
@@ -122,14 +124,39 @@ class Application(Frame):
         self.tier4_list = []
 
     def generate_photos(self):
+        # have to enabled and disable textbox to change value
+        self.output_box['state'] = "normal"
+        self.output_box.delete("1.0", END)
+        self.output_box['state'] = "disabled"
+        # is keyword empty or more than one word?
         if (self.item_entry.get()) and (" " not in self.item_entry.get()):
+            # if not, check the third column in each row to see if the user's entry appears there
             for each in contents:
-                if self.item_entry.get() in each[2]:
-                    print(each)
+                if self.item_entry.get().lower() in each[2]:
+                    # if it is, add it to the tier1 list
                     self.tier1_list.append(each)
-            print(self.tier1_list)
+            for each in self.tier1_list:
+                print(each)
+                print("\n")
+            print("\n\n")
+            #print(self.tier1_list)
+        # check if they have more than one word
+        elif " " in self.item_entry.get():
+            # if they do, give them a message saying so
+            self.output_box['state'] = "normal"
+            self.output_box.insert(END, "Your keyword can only be one word! We'll ignore that field for now.")
+            self.output_box['state'] = "normal"
+        # otherwise, just dump all of contents into tier 1 list for the next stage
         else:
-            print("no!")
+            self.tier1_list = contents
+            #print(self.tier1_list)
+        if self.people_options.get():
+            for each in self.tier1_list:
+                #if self.people
+                if self.people_options.get() in each[3]:
+                    self.tier2_list.append(each)
+                    for each in self.tier2_list:
+                        print(each)
 
 
                                       

@@ -218,6 +218,10 @@ class Application(Frame):
                 <br>
                 '''.format(each[1], each[6])
         
+            self.output_box['state'] = "normal"
+            self.output_box.insert(END, "Opening your results in your default browser!")
+            self.output_box['state'] = "disabled"
+
             html_out = open("final_results.html", "w")
             html_out.write(html)
             html_out.close()

@@ -13,7 +13,7 @@ This is a final project for Information Organization and Retrieval at University
 - Be sure to support at scale, so everything can be scaled up based on what we enter in the Family_Key.csv
 - Display all possible categories (people, place, time) recursively without messing up the GUI
 - Allow multiple people to be selected, but only allow one time and one place
-- while having radio buttons selected, allow for searching from keywords
+- While having radio buttons selected, allow for searching from keywords
 - place a text box widget that the system can either print messages in relation to what has been searched, or the link to the website with the images compiled, or a failure message
     - Allow this to display a list of possible keywords if requests
         - OPTIONAL: cater the list keywords based on what filters are active

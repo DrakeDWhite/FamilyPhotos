@@ -3,9 +3,9 @@
 This is a final project for Information Organization and Retrieval at University of California, Berkeley. It is intended as the beginning phase of a personal project to digitize all family photos in the White-Fields family. It is also intended to serve as a starting point for building a search engine around faceted metadata and keyword search functionality on this collection.
 
 # How do I run this repository?
-Download the full directory onto a computer with Python installed. See [the python documentation](https://www.python.org/downloads/) to see how this is done. Run (double-click) main.py. Bish Bash Bosh, Bob's your uncle. 
+Download the full directory onto a computer with Python installed. See [the Python website](https://www.python.org/downloads/) to see how this is done. Run (double-click) main.py. Bish Bash Bosh, Bob's your uncle. 
 
-Ironically, I do have an uncle Bob, but don't have any photos of him in this collection.
+*Ironically, I do have an Uncle Bob, but don't have any photos of him in this collection.*
 
 ### TO-DO
 - Be sure to support at scale, so everything can be scaled up based on what we enter in the Family_Key.csv

@@ -185,11 +185,9 @@ class Application(Frame):
             for each in self.tier3_list:
                 if str(self.decade_options.get()) == str(each[5]):
                     self.final_list.append(each)
-            print(self.final_list)
         # if they didn't select anything for this filter, do no filtering
         else:
             self.final_list = self.tier3_list
-            print(self.final_list)
 
                                       
 root = Tk()

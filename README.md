@@ -9,9 +9,5 @@ This is a final project for Information Organization and Retrieval at University
 3. Bish Bash Bosh, Bob's your uncle. 
     - *Ironically, I do have a distant Great Uncle Bob, but don't have any photos of him in this collection.*
 
-### TO-DO
-- Allow multiple people to be selected, but only allow one time and one place
-    - Allow this to display a list of possible keywords if requests
-        - OPTIONAL: cater the list keywords based on what filters are active
-- Update readme with screenshots on how the tool works 
-- A "display all" button that displays all pictures on the web page. 
+# How does the search engine work?
+![](https://i.imgur.com/K9MKvdr.png)

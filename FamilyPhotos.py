@@ -71,6 +71,10 @@ class Application(Frame):
         self.item_entry = Entry(self, width = 50)
         self.item_entry.pack(pady = 5, padx = 20)
 
+        # keyword list
+        self.submitBtn = Button(self, text = "See what keywords are available!", command = self.display_keywords)
+        self.submitBtn.pack(pady = 5)
+
         # people dropdown
         Label(self, text = "Pick a person (leave blank for none):",  font = ('arial', 12)).pack(pady = 5)
         self.people_options = ttk.Combobox(self)
@@ -97,7 +101,9 @@ class Application(Frame):
         self.submitBtn.pack(pady = 10)
 
         # the output box, where we'll put all our messages or link to the html page
-        self.output_box = Text(self, height = 5, width = 40, state="disabled", wrap=WORD)
+        self.output_box = Text(self, height = 5, width = 40, state="normal", wrap=WORD)
+        self.output_box.insert(END, "(You can hit 'Go!' without applying any filters to see all photos in the collection.)\n")
+        self.output_box['state'] = 'disabled'
         self.output_box.pack() 
 
 
@@ -141,7 +147,7 @@ class Application(Frame):
             self.output_box['state'] = "disabled"
         # otherwise, just dump all of contents into tier 1 list for the next stage
         else:
-            self.tier1_list = contents
+            self.tier1_list = contents[1:]
 
         ##########
         ### STEP 2 - People filter
@@ -210,7 +216,7 @@ class Application(Frame):
             for each in self.final_list:
                 html += '''
                 <p>
-                    <img src ="{0}" width = "500">
+                    <img src ="{0}" height = "500">
                 </p>
                 <p>
                 {1}
@@ -219,7 +225,7 @@ class Application(Frame):
                 '''.format(each[1], each[6])
         
             self.output_box['state'] = "normal"
-            self.output_box.insert(END, "Opening your results in your default browser!")
+            self.output_box.insert(END, "Opening your results in your default browser...")
             self.output_box['state'] = "disabled"
 
             html_out = open("final_results.html", "w")
@@ -227,6 +233,12 @@ class Application(Frame):
             html_out.close()
 
             webbrowser.open("final_results.html", new=2)
+
+
+    def display_keywords(self):
+        self.output_box['state'] = "normal"
+        self.output_box.insert(END, str(keywords))
+        self.output_box['state'] = "disabled"
 
 
 ### MAIN                                      

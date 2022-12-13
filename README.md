@@ -24,3 +24,25 @@ This is my humble GUI. It's relatively straightforward, but I'll cover each fiel
 
 
 Every filter can be filtered alone, or in tandem with any other of the filters. The program will tell you if there are no results or if what you tried doesn't work, so bash away at the program! and as the tooltext says at the bottom - you can leave all filters blank and see all images in this collection. 
+
+# Write-up
+## Why did I make this data collection? 
+My family has *a lot* of physical photos. My dad especially, always had a camera and was taking pictures of the family. Once he passed, we had a lot of photos to deal with in his estate, and ended up hanging onto all of them. Nowadays, they take up pretty much an entire study at my mom's place, and as a lot of my family doesn't or hasn't ever had access to these photos, I wanted to put them somewhere for posterity so they wouldn't just collect dust.
+
+In addition - my paternal side of the family has always been small, but after a few deaths in short time, there are essentially only two relatives left on that side (not including my immediate family). So - we'd like to have the photos organized in some cohesive structure to help reminisce, and so those members of the family can also see them.
+
+## Why did I decide to organize them this way?
+Well - they were physically organized in almost no way, despite for a vague recollection of chronological order, and even that was somewhat disorganized. There was some first in first out going on as well, seeing as there were literally stacks of photos. Some were on display, very few were in albums, and the vast majority were just tucked away in boxes with hundreds of other photos. 
+
+## Technical specification
+Each photo has quite a few pieces of metadata associated with it:
+- A series of keywords associated with the photograph and its subjects 
+- A series of individual people who are the subjects of each photograph
+- One location datum, which is an approximation of a few key locations photos were taken in
+- One decade datum, which is an approximation of what decade each photo was taken in. Many photos in our physical collection have indeterminate age, though I chose photos for this collection/project that were able to be identified to streamline the process.
+
+## Search mechanisms
+As you can see above, the database and collection supports keyword search, metadata filtering, faceted metadata filtering, and general browsing practices. The collection can support browsing as well as specific information needs and goals, and the myriad of metadata (which I plan to continue expanding, but since its currently manual it's a long process) allows for data foraging and berry-picking models of search. 
+
+## Some limitations
+This project has some obvious places for expansion, both in the techincal design as well as data organization. For the sake of the course, I wanted to keep it straightforward and focus my time on pieces that relate to the course. There are quite a few opportunities for improvment in the search process (such as the ability to select multiple people not currently being support, or being able to search for more than one keyword effectively). There are opportunities for NLP and SEO here as well. I plan to continue this project as a personal project, as this is a goal I've had for some time and this project was an excellent way to kickstart it. 

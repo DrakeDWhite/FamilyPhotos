@@ -11,3 +11,13 @@ This is a final project for Information Organization and Retrieval at University
 
 # How does the search engine work?
 ![](https://i.imgur.com/K9MKvdr.png)
+
+This is my humble GUI. It's relatively straightforward, but I'll cover each field here in detail.
+
+**Keyword** - optional -  as of now, we only support a single keyword in this field. It can be any keyword you like, and you can hit the "See what keywords are available" button to see a comprehensive list of possible options. These are coded manually to each image.
+
+**Person** - optional - a dropdown that displays all possible people in this collection. You can only choose one at a time.
+
+**Place** - optional - a dropdown that displays all possible places where pictures in this collection have been taken. You can only choose one at a time.
+
+**Decade** - optional - a dropdown that displays all possible decades encompassed by this collection. You can only choose one at a time.

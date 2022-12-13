@@ -21,3 +21,6 @@ This is my humble GUI. It's relatively straightforward, but I'll cover each fiel
 **Place** - optional - a dropdown that displays all possible places where pictures in this collection have been taken. You can only choose one at a time.
 
 **Decade** - optional - a dropdown that displays all possible decades encompassed by this collection. You can only choose one at a time.
+
+
+Every filter can be filtered alone, or in tandem with any other of the filters. The program will tell you if there are no results or if what you tried doesn't work, so bash away at the program! and as the tooltext says at the bottom - you can leave all filters blank and see all images in this collection. 

@@ -1,3 +1,5 @@
+from tkinter import *
+
 class Application(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)

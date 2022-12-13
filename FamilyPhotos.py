@@ -23,7 +23,22 @@ with open("Files/Family_key.csv", newline='') as csvfile:
 
         #print("\n\n")
     contents = list(filereader)
-print(contents)
+
+# compile various lists
+for i in range(1, len(contents)):
+    for each in (contents[i][2]).split(", "):
+        if str(each).lower() not in keywords:
+            keywords.append(str(each).lower())
+    for each in (contents[i][3]).split(", "):
+        if str(each).lower() not in people:
+            people.append(str(each).lower())
+#print(contents)
+keywords = sorted(keywords)
+people = sorted(people)
+
+print("Keywords:", keywords)
+print("People: ", people)
+print(len(people))
 
 
 # class Application(Frame):

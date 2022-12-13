@@ -11,6 +11,9 @@ people = []
 # locations, but we don't want repetition, so we'll weed them out as we're adding later
 locations = []
 
+# decades, but we don't want repetition
+decades = []
+
 # open the file
 with open("Files/Family_key.csv", newline='') as csvfile:
     # split each row
@@ -26,19 +29,34 @@ with open("Files/Family_key.csv", newline='') as csvfile:
 
 # compile various lists
 for i in range(1, len(contents)):
+    # compile unique keyword list
     for each in (contents[i][2]).split(", "):
         if str(each).lower() not in keywords:
             keywords.append(str(each).lower())
+    # compile unique people list
     for each in (contents[i][3]).split(", "):
         if str(each).lower() not in people:
             people.append(str(each).lower())
-#print(contents)
+    # compile locations
+    if contents[i][4] not in locations:
+        locations.append(contents[i][4])
+    # compile contents
+    if contents[i][5] not in decades:
+        decades.append(contents[i][5])
+
+
 keywords = sorted(keywords)
 people = sorted(people)
+locations = sorted(locations)
+decades = sorted(decades)
 
-print("Keywords:", keywords)
-print("People: ", people)
-print(len(people))
+# tracing
+#print(contents)
+#print("Keywords:", keywords)
+#print("People: ", people)
+#print(len(people))
+#print("Locations:", locations)
+#print("Decades:", decades)
 
 
 # class Application(Frame):

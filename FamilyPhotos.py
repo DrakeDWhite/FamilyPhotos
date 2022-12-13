@@ -232,7 +232,7 @@ class Application(Frame):
 ### MAIN                                      
 root = Tk()
 root.title("White-Fields Family Photo Search")
-root.geometry("345x800")
+root.geometry("345x400")
 app = Application(root)
 root.mainloop()
 input()

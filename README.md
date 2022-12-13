@@ -7,7 +7,7 @@ This is a final project for Information Organization and Retrieval at University
     - See [the Python website](https://www.python.org/downloads/) to see how this is done. 
 2. Run (double-click) main.py. 
 3. Bish Bash Bosh, Bob's your uncle. 
-    - *Ironically, I do have a distant great Uncle Bob, but don't have any photos of him in this collection.*
+    - *Ironically, I do have a distant Great Uncle Bob, but don't have any photos of him in this collection.*
 
 ### TO-DO
 - Be sure to support at scale, so everything can be scaled up based on what we enter in the Family_Key.csv
@@ -18,4 +18,4 @@ This is a final project for Information Organization and Retrieval at University
     - Allow this to display a list of possible keywords if requests
         - OPTIONAL: cater the list keywords based on what filters are active
 - Update readme with screenshots on how the tool works 
-
+- A "display all" button that displays all pictures on the web page. 

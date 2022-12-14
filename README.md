@@ -5,8 +5,11 @@ This is a final project for Information Organization and Retrieval at University
 # How do I run this repository?
 1. Download the full directory onto a computer with Python installed.
     - See [the Python website](https://www.python.org/downloads/) to see how this is done. 
-2. Run (double-click) FamilyPhotos.py
-3. Fill out the search queries (detailed below) for the GUI that shows up. and at that, bish bash bosh, bobs your uncle. your results will open in your default browser window. 
+2. Create a folder called "Files" in the same directory level as FamilyPhotos.py. 
+3. Paste the Family_Key.csv file (provided separately for privacy) into the Files directory.
+    - This means you should have a folder called Files and FamilyPhotos.py at the same level, then a file called Family_Key.csv inside of Files. 
+3. Run (double-click) FamilyPhotos.py
+4. Fill out the search queries (detailed below) for the GUI that shows up. and at that, bish bash bosh, bobs your uncle. your results will open in your default browser window. 
     - *Ironically, I do have a distant Great Uncle Bob, but don't have any photos of him in this collection.*
 
 # How does the search engine work?

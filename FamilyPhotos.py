@@ -237,6 +237,7 @@ class Application(Frame):
 
     def display_keywords(self):
         self.output_box['state'] = "normal"
+        self.output_box.delete("1.0", END)
         self.output_box.insert(END, str(keywords))
         self.output_box['state'] = "disabled"
 
